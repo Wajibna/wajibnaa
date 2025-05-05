@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/wajibnaa/static/css/main.f93c14f6.css",
+    "main.js": "/wajibnaa/static/js/main.441b4703.js",
+    "static/js/453.569e1156.chunk.js": "/wajibnaa/static/js/453.569e1156.chunk.js",
+    "index.html": "/wajibnaa/index.html",
+    "main.f93c14f6.css.map": "/wajibnaa/static/css/main.f93c14f6.css.map",
+    "main.441b4703.js.map": "/wajibnaa/static/js/main.441b4703.js.map",
+    "453.569e1156.chunk.js.map": "/wajibnaa/static/js/453.569e1156.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f93c14f6.css",
+    "static/js/main.441b4703.js"
+  ]
+}
