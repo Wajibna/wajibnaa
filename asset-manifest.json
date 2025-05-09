@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/_Wajibna/static/css/main.2ee80a37.css",
-    "main.js": "/_Wajibna/static/js/main.e48969a5.js",
-    "static/js/453.569e1156.chunk.js": "/_Wajibna/static/js/453.569e1156.chunk.js",
-    "static/media/logo.png": "/_Wajibna/static/media/logo.ef911d233af5c6558ffa.png",
-    "index.html": "/_Wajibna/index.html",
-    "main.2ee80a37.css.map": "/_Wajibna/static/css/main.2ee80a37.css.map",
-    "main.e48969a5.js.map": "/_Wajibna/static/js/main.e48969a5.js.map",
-    "453.569e1156.chunk.js.map": "/_Wajibna/static/js/453.569e1156.chunk.js.map"
+    "main.css": "/_wajibna/static/css/main.2ee80a37.css",
+    "main.js": "/_wajibna/static/js/main.6c112872.js",
+    "static/js/453.569e1156.chunk.js": "/_wajibna/static/js/453.569e1156.chunk.js",
+    "static/media/logo.png": "/_wajibna/static/media/logo.ef911d233af5c6558ffa.png",
+    "index.html": "/_wajibna/index.html",
+    "main.2ee80a37.css.map": "/_wajibna/static/css/main.2ee80a37.css.map",
+    "main.6c112872.js.map": "/_wajibna/static/js/main.6c112872.js.map",
+    "453.569e1156.chunk.js.map": "/_wajibna/static/js/453.569e1156.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2ee80a37.css",
-    "static/js/main.e48969a5.js"
+    "static/js/main.6c112872.js"
   ]
 }
