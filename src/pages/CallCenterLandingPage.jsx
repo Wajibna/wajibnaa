@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
+import { assets } from "../assets/assets";
+import { useInView } from "react-intersection-observer";
+
+import {
+  FaPhone,
+  FaUsers,
+  FaChartLine,
+  FaComments,
+  FaEnvelope,
+  FaHashtag,
+  FaCrown, FaLightbulb, FaChartBar, FaAward, FaUserGraduate, FaRobot
+} from 'react-icons/fa';
+
 import {
   PhoneCall,
   Clock,
@@ -14,7 +27,10 @@ import {
   BadgeCheck,
   MessageCircle,
   XCircle,
-  CheckCircle
+  CheckCircle,
+  Award,
+  Users,
+  Globe
 
 } from "lucide-react";
 export default function CallCenterLandingPage() {
@@ -35,25 +51,48 @@ export default function CallCenterLandingPage() {
   };
 
   const validatePhone = (input) => {
-    const re = /^[0-9]{10}$/; // يتوقع 10 أرقام
+    const re = /^[0-9]{10}$/;
     setIsValidPhone(re.test(input));
     setPhone(input);
   };
+  const iconColors = [
+    "bg-purple-500",
+    "bg-blue-500",
+    "bg-green-500",
+    "bg-yellow-500",
+    "bg-pink-500",
+    "bg-indigo-500"
+  ];
   const features = [
     {
-      icon: Clock,
-      title: "دعم 24/7",
-      description: "فريقنا يعمل على مدار الساعة لخدمة زبائنك بدون توقف"
+      icon: FaChartLine,
+      title: "تحليل الأداء",
+      description: "نستخدم أدوات تحليل متقدمة لمراجعة بيانات المكالمات وتقديم رؤى قيمة تساعد في تحسين استراتيجيات خدمة العملاء "
     },
     {
-      icon: PhoneCall,
-      title: "تقليل الضغط",
-      description: "نريح موظفي مطعمك من الرد على المكالمات الكثيرة"
+      icon: FaUsers,
+      title: "(CRM) إدارة علاقات العملاء",
+      description: "حلول متكاملة لإدارة العلاقات مع العملاء باستخدام أحدث التقنيات لمتابعة التفاعلات وتحليل السلوكيات"
     },
     {
-      icon: Zap,
-      title: "سرعة الاستجابة",
-      description: "نرد على المكالمات بسرعة ونُسجّل الطلبات بدقة"
+      icon: FaPhone,
+      title: "إدارة المكالمات",
+      description: "إدارة احترافية للمكالمات الواردة والصادرة مع توفير تجربة متميزة لكل عميل وحل سريع للاستفسارات "
+    },
+    {
+      icon: FaComments,
+      title: "مكالمات التقييم",
+      description: "جمع تعليقات العملاء وتقييم جودة الخدمة والأداء للحصول على رؤى دقيقة لتحسين الخدمات "
+    },
+    {
+      icon: FaEnvelope,
+      title: "الرسالة الترحيبية",
+      description: " رسائل ترحيبية مخصصة تعزز التجربة الأولية للعملاء وتوفر تواصلاً احترافياً"
+    },
+    {
+      icon: FaHashtag,
+      title: "رقم موحد للتواصل",
+      description: "رقم واحد لجميع الفروع يسهل على العملاء الوصول للخدمات وتقديم الاستفسارات بكفاءة"
     }
   ];
   const steps = [
@@ -70,11 +109,38 @@ export default function CallCenterLandingPage() {
       description: "يتم إرسال الطلب مباشرة للمطعم عبر الوسيلة التي تختارها"
     }
   ];
+const StrategicVisionSection = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
+
+  const items = [
+    {
+      title: "الزهرة الاستراتيجية",
+      content: "تدريب وتطوير الفريق",
+      description: "نؤمن بأهمية التدريب المستمر لموظفينا لضمان تقديم خدمة متصرة، نحن نستثمر في تطوير مهارات فريقنا وتعزيز كفاءاتهم لضمان تحقيق أعلى معايير الأداء والاحترافية.",
+      color: "from-purple-500 to-blue-500"
+    },
+    {
+      title: "",
+      content: "تحقيق التميز التشغيلي",
+      description: "نسعى لتحقيق التميز التشغيلي من خلال تحسين العمليات الداخلية، إدارة المكالمات بكفاءة، وتعزيز التواصل الداخلي. هدفنا هو تحقيق الكفاءة التشغيلية وتقليل التكاليف مع الحفاظ على جودة الخدمة.",
+      color: "from-amber-500 to-orange-500"
+    },
+    {
+      title: "",
+      content: "توسيع نطاق الخدمات",
+      description: "نهدف إلى توسيع نطاق خدماتنا لتلبية احتياجات مجموعة متنوعة من العملاء، بما في ذلك تقديم حلول مخصصة ومبتكرة. نحن نعمل على تطوير عروضنا التناسب مع متطلبات السوق وتوفير حلول فعالة لمختلف المجالات.",
+      color: "from-emerald-500 to-teal-600"
+    }
+  ];}
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+
   const [startCounting, setStartCounting] = useState(false);
   const [stats, setStats] = useState({
     restaurants: 0,
@@ -161,6 +227,24 @@ export default function CallCenterLandingPage() {
   const prevReview = () => {
     setCurrentIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
   };
+  const whyus = [
+    { title: "خبرة تتجاوز 5 سنوات", description: "عملاء راضون وخدمات متفوقة", icon: "✅👥" },
+    { title: "تطوير مستمر", description: "تحسينات دائمة لتجربتك", icon: "🔄" },
+    { title: "تجربة عملاء غير مسبوقة", description: "ضمان جودة لخمس سنوات", icon: "💰" },
+    { title: "تدريب احترافي", description: "تطوير الفريق بشكل دائم", icon: "🎯" },
+    { title: "إحترافية في إدارة المكالمات", description: "إدارة احترافية للمكالمات", icon: "📞" },
+    { title: "تقنية متقدمة", description: "استخدام أحدث التقنيات", icon: "💻" }
+  ];
+
+  // تعريف colors خارج المكون كمتغير ثابت
+  const colors = [
+    "bg-blue-100 border-blue-300",
+    "bg-green-100 border-green-300",
+    "bg-yellow-100 border-yellow-300",
+    "bg-purple-100 border-purple-300",
+    "bg-pink-100 border-pink-300",
+    "bg-indigo-100 border-indigo-300"
+  ];
 
   return (
     <div className="font-sans text-gray-800">
@@ -181,7 +265,7 @@ export default function CallCenterLandingPage() {
           <MessageCircle className="w-8 h-8" />
         </a>
       </motion.div>
-      
+
       {/* Navigation Bar */}
       <nav className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4">
@@ -191,21 +275,17 @@ export default function CallCenterLandingPage() {
               whileHover={{ scale: 1.05 }}
               className="flex items-center gap-2 text-xl md:text-2xl font-bold text-blue-700"
             >
-              <img
-                src="/logo.png"
-                alt="شعار واجبنا"
-                className="w-8 h-8 md:w-10 md:h-10 object-contain"
-              />
+              <img src={assets.logo} className="w-10 h-10 md:w-8 object-contain" alt="logo" />
               <span>Wajibna - واجبنا</span>
             </motion.div>
 
             {/* قائمة التنقل (للكمبيوتر) */}
             <div className="hidden md:flex gap-4">
-              {[
+              {[               
+                { name: 'اتصل بنا', href: '#contact' },
                 { name: 'المميزات', href: '#features' },
                 { name: 'كيف نعمل', href: '#how-it-works' },
-                { name: 'آراء العملاء', href: '#testimonials' },
-                { name: 'اتصل بنا', href: '#contact' },
+                 { name: 'من نحن', href: '#about' },
               ].map((item) => (
                 <a
                   key={item.name}
@@ -218,7 +298,7 @@ export default function CallCenterLandingPage() {
             </div>
 
             {/* زر القائمة (للموبايل) */}
-            <button 
+            <button
               className="md:hidden text-gray-700"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
@@ -228,9 +308,8 @@ export default function CallCenterLandingPage() {
             </button>
           </div>
 
-          {/* القائمة المنسدلة (للموبايل) */}
           {isMenuOpen && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -240,7 +319,7 @@ export default function CallCenterLandingPage() {
                 {[
                   { name: 'المميزات', href: '#features' },
                   { name: 'كيف نعمل', href: '#how-it-works' },
-                  { name: 'آراء العملاء', href: '#testimonials' },
+                  { name: 'من نحن', href: '#about' },
                   { name: 'اتصل بنا', href: '#contact' },
                 ].map((item) => (
                   <a
@@ -260,24 +339,29 @@ export default function CallCenterLandingPage() {
 
       {/* قسم الهيرو */}
       <section className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 md:py-24 px-4 text-center">
-        <motion.h1 
-          initial={{ opacity: 0, y: -50 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.6 }} 
-          className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6"
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight text-center"
+          style={{
+            fontFamily: "'Tajawal', sans-serif",
+            lineHeight: '1.2',
+            textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
         >
-          خدمة كول سنتر احترافية للمطاعم
+          <span className="block">خدمة العملاء الجيدة</span>
+          <span className="block">هي أداة التسويق النهائية</span>
         </motion.h1>
-        
-        <motion.p 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
-          transition={{ delay: 0.3 }} 
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
           className="text-base md:text-lg lg:text-xl mb-6 md:mb-8 px-2"
         >
-          نستقبل مكالماتك وطلبات زبائنك، وأنت ركّز على جودة الأكل!
+          ! نستقبل مكالماتك وطلبات زبائنك، وأنت ركّز على جودة الأكل
         </motion.p>
-        
+
         <motion.button
           onClick={() => {
             const contactSection = document.getElementById('contact');
@@ -292,37 +376,74 @@ export default function CallCenterLandingPage() {
       </section>
 
       {/* About Section */}
-      <section className="py-20 px-6 max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-4">من نحن؟</h2>
-        <p className="text-lg text-gray-700 leading-relaxed">
-          نحن شركة متخصصة في خدمات الكول سنتر للمطاعم. فريقنا مدرب على استقبال المكالمات بكفاءة واحترافية عالية، لضمان راحة زبائنك وزيادة مبيعاتك
+      <section id="about" className="py-16 px-6 max-w-5xl mx-auto text-center" dir="rtl">
+        <h2 className="text-4xl font-bold mb-6 text-gray-800">من نحن؟</h2>
+        <p className="text-lg text-gray-700 leading-relaxed mb-12">
+          تأسست شركة واجبنا بهدف تقديم حلول مبتكرة وشاملة لتحسين تجربة العملاء. نحن نؤمن بأن خدمة العملاء المتميزة هي العنصر الحاسم في نجاح أي عمل تجاري، ولذلك نقدم خدماتنا بأعلى مستويات الاحترافية والجودة.
         </p>
-      </section>
 
-      {/* Features Section */}
-      <section className="bg-gray-100 py-20 px-6" id="features">
-        <h2 className="text-4xl font-bold mb-12 text-center">مميزات خدمتنا</h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white rounded-2xl shadow-lg p-8 text-center"
-            >
-              <div className="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
-                <feature.icon className="w-8 h-8 text-blue-600" />
+        {/* Vision & Team with Icons */}
+        <div className="grid md:grid-cols-2 gap-8 text-right">
+          {/* Vision Card */}
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+            <div className="flex justify-end mb-4">
+              <div className="bg-blue-100 p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </motion.div>
-          ))}
+            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-3">رؤيتنا</h3>
+            <p className="text-gray-600">
+              أن نكون الشريك الأول للمطاعم في تحقيق النجاح والربح من خلال حلول كول سنتر متطورة وتفاعلية.
+            </p>
+          </div>
+
+          {/* Team Card */}
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+            <div className="flex justify-end mb-4">
+              <div className="bg-yellow-100 p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-3">فريقنا</h3>
+            <p className="text-gray-600">
+              فريق محترف مدرب بشكل مستمر لتقديم أفضل خدمة عملاء، يجمع بين الخبرة والالتزام بالجودة.
+            </p>
+          </div>
         </div>
       </section>
+      {/* Features Section */}
+      <section className="bg-gradient-to-b from-blue-50 to-white py-12 px-4" id="features">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-3 text-center text-blue-800">الخدمات المقدمة</h2>
+          <h4 className="text-lg text-blue-600 text-center mb-8 font-medium">"نعمل خلف الكواليس لتظهر أنت في المقدمة"</h4>
 
+          <div className="grid md:grid-cols-3 gap-5">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.03 }}
+                className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-sm transition-all"
+              >
+                <div className="p-5 text-center">
+                  <div className={`${iconColors[index]} w-12 h-12 mx-auto rounded-full flex items-center justify-center mb-3`}>
+                    <feature.icon className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-gray-800">{feature.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{feature.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="bg-gradient-to-br from-green-500 to-green-600 text-white py-12 px-4 mb-16">
         <div className="max-w-4xl mx-auto">
           {/* العنوان المختصر */}
@@ -341,7 +462,7 @@ export default function CallCenterLandingPage() {
           {/* العروض المدمجة */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
             {[
-              { messages: "رسالة 1000 ", price: "JD 10" },
+              { messages: "1000 رسالة", price: "JD 10" },
               { messages: "رسالة 3000 ", price: "JD 20" },
               { messages: "رسالة 5000 ", price: "JD 30" },
             ].map((offer, index) => (
@@ -357,21 +478,21 @@ export default function CallCenterLandingPage() {
                 <div className="text-lg mt-2">{offer.price}</div>
                 <div className="h-px bg-white/20 my-3"></div>
                 <h4>أطلب الآن</h4>
-                <a 
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-all duration-300"
-        aria-label="تواصل معنا عبر واتساب"
-      >
-        
-        <MessageCircle className="w-8 h-8" />
-        
-        {/* إشعار صغير (اختياري) */}
-        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
-          1
-        </span>
-      </a>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-all duration-300"
+                  aria-label="تواصل معنا عبر واتساب"
+                >
+
+                  <MessageCircle className="w-8 h-8" />
+
+                  {/* إشعار صغير (اختياري) */}
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+                    1
+                  </span>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -383,94 +504,161 @@ export default function CallCenterLandingPage() {
             transition={{ delay: 0.4 }}
             className="text-center mt-8 text-green-100"
           >
-            <MessageCircle className="inline-block w-5 h-5 mr-2" />
-            ! تواصل مع عملائك مباشرة وبكل سهولة
+
           </motion.p>
         </div>
       </section>
       {/* Stats Section */}
       <section id="stats-section" className="py-16 bg-blue-600 text-white">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-8 text-center">
-          {/* مطاعم عملاء */}
+        <div className="max-w-6xl mx-auto px-6">
+          {/* العنوان الرئيسي */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="p-4"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
           >
-            <div className="text-4xl font-bold mb-2">
-              {startCounting && (
-                <CountUp
-                  start={0}
-                  end={stats.restaurants}
-                  duration={3}
-                  separator=","
-                />
-              )}+
-            </div>
-            <div className="text-lg">مطعم عميل</div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">أرقامنا تتحدث عنا</h2>
           </motion.div>
 
-          {/* طلبات شهرية */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="p-4"
-          >
-            <div className="text-4xl font-bold mb-2">
-              {startCounting && (
-                <CountUp
-                  start={0}
-                  end={stats.monthlyOrders}
-                  duration={3}
-                  separator=","
-                />
-              )}+
-            </div>
-            <div className="text-lg">طلب شهرياً</div>
-          </motion.div>
+          {/* الإحصائيات */}
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            {/* مطاعم عملاء */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="p-4"
+            >
+              <div className="text-4xl font-bold mb-2">
+                {startCounting && (
+                  <CountUp
+                    start={0}
+                    end={stats.restaurants}
+                    duration={3}
+                    separator=","
+                  />
+                )}+
+              </div>
+              <div className="text-lg">مطعم عميل</div>
+            </motion.div>
 
-          {/* ساعات عمل */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="p-4"
-          >
-            <div className="text-4xl font-bold mb-2">
-              {startCounting && (
-                <CountUp
-                  start={0}
-                  end={stats.workingHours}
-                  duration={3}
-                />
-              )}/7
-            </div>
-            <div className="text-lg">ساعة عمل</div>
-          </motion.div>
+            {/* طلبات شهرية */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="p-4"
+            >
+              <div className="text-4xl font-bold mb-2">
+                {startCounting && (
+                  <CountUp
+                    start={0}
+                    end={stats.monthlyOrders}
+                    duration={3}
+                    separator=","
+                  />
+                )}+
+              </div>
+              <div className="text-lg">طلب شهرياً</div>
+            </motion.div>
 
-          {/* رضا العملاء */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="p-4"
-          >
-            <div className="text-4xl font-bold mb-2">
-              {startCounting && (
-                <CountUp
-                  start={0}
-                  end={stats.satisfaction}
-                  duration={3}
-                  decimals={1}
-                />
-              )}%
-            </div>
-            <div className="text-lg">رضا العملاء</div>
-          </motion.div>
+            {/* ساعات عمل */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="p-4"
+            >
+              <div className="text-4xl font-bold mb-2">
+                {startCounting && (
+                  <CountUp
+                    start={0}
+                    end={stats.workingHours}
+                    duration={3}
+                  />
+                )}/7
+              </div>
+              <div className="text-lg">ساعة عمل</div>
+            </motion.div>
+
+            {/* رضا العملاء */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="p-4"
+            >
+              <div className="text-4xl font-bold mb-2">
+                {startCounting && (
+                  <CountUp
+                    start={0}
+                    end={stats.satisfaction}
+                    duration={3}
+                    decimals={1}
+                  />
+                )}%
+              </div>
+              <div className="text-lg">رضا العملاء</div>
+            </motion.div>
+          </div>
         </div>
       </section>
+
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white py-20 px-4 flex items-center justify-center">
+        <div className="relative w-full max-w-3xl h-[500px] md:h-[700px] flex items-center justify-center">
+          {/* النص المركزي الثابت - أصغر حجماً */}
+          <h2 className="absolute z-10 text-2xl md:text-4xl font-bold text-center text-blue-800 bg-white/80 backdrop-blur-sm rounded-full p-4 md:p-6 shadow-lg">
+            لماذا واجبنا؟
+          </h2>
+
+          {/* Container for rotating elements */}
+          <motion.div
+            className="relative w-full h-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            {/* العناصر الدوارة حول المركز */}
+            {whyus.map((feature, index) => {
+              const angle = (index * 360) / whyus.length;
+              const radius = window.innerWidth < 768 ? 150 : 220; // نصف القطر بناءً على حجم الشاشة
+
+              return (
+                <motion.div
+                  key={index}
+                  className={`absolute w-28 h-28 md:w-40 md:h-40 flex flex-col items-center justify-center text-center rounded-full border-2 p-2 md:p-4 ${colors[index]}`}
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    x: '-50%',
+                    y: '-50%',
+                    translateX: `${Math.cos((angle * Math.PI) / 180) * radius}px`,
+                    translateY: `${Math.sin((angle * Math.PI) / 180) * radius}px`,
+                  }}
+                  animate={{
+                    rotate: -360
+                  }}
+                  transition={{
+                    duration: 30,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  whileHover={{ scale: 1.15, zIndex: 20 }}
+                >
+                  <div className="text-3xl md:text-4xl mb-1 md:mb-2">{feature.icon}</div>
+                  <h3 className="text-xs md:text-sm font-semibold text-gray-800">
+                    {feature.title}
+                  </h3>
+                  <p className="text-xs md:text-sm text-gray-600 mt-1">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </div>
+
       {/* How it Works */}
       <section className="py-20 px-6 max-w-5xl mx-auto text-center" id="how-it-works">
         <h2 className="text-4xl font-bold mb-10">كيف نعمل؟</h2>
@@ -499,6 +687,7 @@ export default function CallCenterLandingPage() {
           ))}
         </div>
       </section>
+      
       {/* Contact Form */}
       <section className="py-20 px-6 bg-gray-50" id="contact">
         <div className="max-w-4xl mx-auto">
@@ -516,7 +705,7 @@ export default function CallCenterLandingPage() {
                 <div className="space-y-4">
                   <div className="flex items-center">
                     <PhoneCall className="w-5 h-5 mr-2" />
-                    <span>0793630041</span>
+                    <span>00962772065354</span>
                   </div>
                   <div className="flex items-center">
                     <Mail className="w-5 h-5 mr-2" />
@@ -674,7 +863,7 @@ export default function CallCenterLandingPage() {
           <div className="md:flex md:justify-between md:items-center">
             <div className="mb-8 md:mb-0">
               <h3 className="text-2xl font-bold mb-4">Wajibna - واجبنا</h3>
-              <p className="mb-4">حلول متكاملة لخدمة عملاء المطاعم</p>
+              <p className="mb-4">"مع واجبنا، تجربة العملاء ليست مجرد خدمة، بل رحلة نجاح"</p>
               <div className="flex space-x-4 space-x-reverse">
                 <a
                   href="https://www.facebook.com/share/1C6B8xBo4o/"
@@ -692,6 +881,14 @@ export default function CallCenterLandingPage() {
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
+                <a
+                  href="https://www.wajibnaacc.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition"
+                >
+                  <Globe className="w-5 h-5" />
+                </a>
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
@@ -703,24 +900,21 @@ export default function CallCenterLandingPage() {
                   <li><a href="#how-it-works" className="hover:text-blue-300 transition">كيف نعمل</a></li>
                 </ul>
               </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">الخدمات</h4>
-                <ul className="space-y-2">
-                  <li><a href="#" className="hover:text-blue-300 transition">استقبال الطلبات</a></li>
-                  <li><a href="#" className="hover:text-blue-300 transition">حجوزات الطاولات</a></li>
-                  <li><a href="#" className="hover:text-blue-300 transition">استطلاعات الرأي</a></li>
-                </ul>
-              </div>
+
               <div>
                 <h4 className="text-lg font-semibold mb-4">تواصل معنا</h4>
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <PhoneCall className="w-4 h-4 mr-2" />
-                    <span>0793630041</span>
+                    <span> 00962772065354</span>
                   </li>
                   <li className="flex items-center">
                     <Mail className="w-4 h-4 mr-2" />
                     <span>info@wajIbnaa.com</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Globe className="w-4 h-4 mr-2" />
+                    <span> WWW.WAJIBNAACC.COM</span>
                   </li>
                 </ul>
               </div>
